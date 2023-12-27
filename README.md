@@ -117,7 +117,7 @@ $BODY$ ;
 
     17) Öğrenci tablosuna yeni öğrenci eklemek için "ekle" adında bir prosedür oluşturun.
 
-CREATE PROCEDURE ekle
+CREATE PROCEDURE addStudent
 (@ograd character varying,
 @ogrsoyad character varying,
 @dtarih DATE,
@@ -150,7 +150,7 @@ $BODY$;
     $BODY$;
 
 20) Öğrenci adı ve soyadını "Ad Soyad" olarak birleştirip, ad soyada göre kolayca arama yapmayı sağlayan bir prosedür yazın.
-    CREATE FUNCTİON search
+    CREATE FUNCTION search
     (full_name character varying)
     RETURNS SETOF ogrenci
     LANGUAGE "sql"
@@ -162,16 +162,23 @@ $BODY$;
 
 21. Daha önceden oluşturduğunu tüm prosedürleri silin.
 
-DROP PROCEDURE IF EXISTS ekle;
-DROP PROCEDURE IF EXISTS sil;
-DROP PROCEDURE IF EXISTS updateClass;
+DROP PROCEDURE IF EXISTS addStudent;
+DROP PROCEDURE IF EXISTS deleteById;
+DROP PROCEDURE IF EXISTS updateClassByNo;
 
-#Esnek görevler (Esnek görevlerin hepsini Select in Select ile gerçekleştirmeniz beklenmektedir.) 22) Select in select yöntemiyle dram türündeki kitapları listeleyiniz.
+#Esnek görevler (Esnek görevlerin hepsini Select in Select ile gerçekleştirmeniz beklenmektedir.)
 
-23. Adı e harfi ile başlayan yazarların kitaplarını listeleyin.
+22. Select in select yöntemiyle dram türündeki kitapları listeleyiniz.
+    SELECT \* FROM ogrenci
+    WHERE turno=(
+    SELECT turno FROM tur
+    WHERE turadi="DRAM"
+    )
 
-24. Kitap okumayan öğrencileri listeleyiniz.
+23) Adı e harfi ile başlayan yazarların kitaplarını listeleyin.
 
-25. Okunmayan kitapları listeleyiniz
+24) Kitap okumayan öğrencileri listeleyiniz.
 
-26. Mayıs ayında okunmayan kitapları listeleyiniz.
+25) Okunmayan kitapları listeleyiniz
+
+26) Mayıs ayında okunmayan kitapları listeleyiniz.
