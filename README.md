@@ -176,9 +176,18 @@ DROP PROCEDURE IF EXISTS updateClassByNo;
     )
 
 23) Adı e harfi ile başlayan yazarların kitaplarını listeleyin.
-
+    SELECT \* FROM kitap
+    WHERE author_id IN
+    (SELECT author_id FROM yazar
+    WHERE author_name LIKE="e%")
 24) Kitap okumayan öğrencileri listeleyiniz.
-
+    SELECT \* FROM ogrenci
+    WHERE ogrno NOT IN (SELECT DISTINCT ogrno FROM kitap);
 25) Okunmayan kitapları listeleyiniz
-
+    SELECT \* FROM kitap
+    WHERE kitapno NOT IN (SELECT DISTINCT kitapno FROM islem);
 26) Mayıs ayında okunmayan kitapları listeleyiniz.
+    SELECT \* FROM kitap
+    WHERE kitapno IN (SELECT kitapno FROM islem
+    WHERE EXTRACT(MONTH from atarih::timestamp) != 5
+    AND EXTRACT(MONTH from vtarih::timestamp) != 5)
